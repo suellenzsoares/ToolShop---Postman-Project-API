@@ -28,9 +28,13 @@ Execute individual requests or the entire collection/folders to see the tests ru
 
 ## Requests Included
 The collection is organized into folders:
+
 📁 Products: 
+
   [GET] List the product by name: Searches for products using a parameterized query (q). Includes tests validating status code, response structure (non-empty data array), and key product details (id, name, description, price).
+  
 📁 Cart: 
+
   [POST] Add a product to the cart by id: Adds a product to the cart using a parameterized product ID in the request body. Includes a test validating the 201 Created status code, confirming successful addition. Note: Based on analysis, this endpoint on the practice site doesn't require authentication headers.
 
 ## Variables
