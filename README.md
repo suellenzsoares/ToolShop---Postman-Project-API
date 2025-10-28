@@ -29,6 +29,9 @@ Execute individual requests or the entire collection/folders to see the tests ru
 ## Requests Included
 The collection is organized into folders:
 
+📁 Login: 
+  [POST] Created the login and generate the barear token, at the same folder used the [GET] user method to validate the token created.
+  
 📁 Products: 
 
   [GET] List the product by name: Searches for products using a parameterized query (q). Includes tests validating status code, response structure (non-empty data array), and key product details (id, name, description, price).
