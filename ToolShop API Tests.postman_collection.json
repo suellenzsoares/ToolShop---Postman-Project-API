@@ -7,6 +7,110 @@
 	},
 	"item": [
 		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "[POST] Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// 1. Convert the answer to json.\r",
+									"const responseData = pm.response.json();\r",
+									"// 2. Get the value of the token inside the object\r",
+									"const token = responseData.access_token;\r",
+									"\r",
+									"// 3. Save the value in a env variable\r",
+									"pm.environment.set(\"AUTH_TOKEN\", token);\r",
+									"\r",
+									"console.log(\"{{AUTH_TOKEN}}\")"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{pass}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.practicesoftwaretesting.com/users/login",
+							"protocol": "https",
+							"host": [
+								"api",
+								"practicesoftwaretesting",
+								"com"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] User after login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code é 200 OK\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AUTH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.practicesoftwaretesting.com/users/me",
+							"protocol": "https",
+							"host": [
+								"api",
+								"practicesoftwaretesting",
+								"com"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "Products",
 			"item": [
 				{
@@ -139,11 +243,42 @@
 			]
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "baseURL",
-			"value": "",
-			"type": "default"
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "pass",
+			"value": ""
 		}
 	]
 }
